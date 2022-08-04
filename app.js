@@ -14,6 +14,7 @@ let express         = require('express'),
     i18nFsBackend   = require('i18next-fs-backend'),
     i18nMiddleware = require('i18next-http-middleware'),
     swaggerUi = require("swagger-ui-express");
+    let getInfoManager = require("./modules/manager/Get_info")
     
 process.env.TZ = "Africa/Gamibia";
 console.log('Initializing Server.',new Date().toString() );
@@ -47,7 +48,7 @@ const docOptions = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'YoApp',
+            title: 'School-service',
             version: '1',
         },
         servers: [{
@@ -71,7 +72,20 @@ const docOptions = {
 };
 const swaggerSpec = swaggerJSDoc(docOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
- 
+app.post('/payment_status',async (req,res,next)=>{
+  console.log("payment_status",req.body)
+  let resp = await getInfoManager.markPaymentSuccess(req)
+  console.log(resp)
+  if(!resp.status){
+    console.log("Here");
+    res.redirect(process.env.WEB_BASE_URL+"/error/"+resp.txn_id)
+    
+  }else{
+    res.redirect(process.env.WEB_BASE_URL+"/thank-you/"+resp.txn_id)
+  }
+  
+
+}) 
 app.use('/public', express.static(__dirname + '/public'));
 app.use('/uploads', express.static(__dirname + '/uploads'));
 

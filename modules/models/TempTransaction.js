@@ -66,6 +66,27 @@ module.exports = sequelize_mysql.define("temp_transaction",
         status : {
             type: Sequelize.STRING,          
         },
+        parent_name : {
+            type: Sequelize.STRING,          
+        },
+        parent_email : {
+            type: Sequelize.STRING,          
+        },
+        parent_mobile : {
+            type: Sequelize.STRING,          
+        },
+        txn_no : {
+            type: Sequelize.STRING,          
+        },
+        txn_amount_received : {
+            type: Sequelize.STRING,          
+        },
+        txn_date : {
+            type: Sequelize.STRING,          
+        },
+        txt_mode : {
+            type: Sequelize.STRING,          
+        },
         created : {
             type: Sequelize.DATE,
             defaultValue: ()=>new Date()

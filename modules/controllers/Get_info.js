@@ -50,8 +50,65 @@ let markPaymentSuccess = (req, res, next) => {
         })
         .catch(next);
 }
+let getFinancialYear = (req, res, next) => {
+
+    return getInforManager
+        .getFinancialYear(req)
+        .then(data => {
+            let result = {
+                status: 200,
+                data: data
+            }
+            return res.json(result);
+        })
+        .catch(next);
+}
+let getTransactionDetails = (req, res, next) => {
+
+    return getInforManager
+        .getTransactionDetails(req)
+        .then(data => {
+            let result = {
+                status: 200,
+                data: data
+            }
+            return res.json(result);
+        })
+        .catch(next);
+}
+let generateCheckSum = (req, res, next) => {
+
+    return getInforManager
+        .generateCheckSum(req)
+        .then(data => {
+            let result = {
+                status: 200,
+                data: data
+            }
+            return res.json(result);
+        })
+        .catch(next);
+}
+let getCheckSumRetry = (req, res, next) => {
+
+    return getInforManager
+        .getCheckSumRetry(req)
+        .then(data => {
+            let result = {
+                status: 200,
+                data: data
+            }
+            return res.json(result);
+        })
+        .catch(next);
+}
+
 module.exports = {
     getInfo: getInfo,
     processPayment: processPayment,
-    markPaymentSuccess: markPaymentSuccess
+    markPaymentSuccess: markPaymentSuccess,
+    getFinancialYear:getFinancialYear,
+    getTransactionDetails:getTransactionDetails,
+    generateCheckSum:generateCheckSum,
+    getCheckSumRetry:getCheckSumRetry
 };

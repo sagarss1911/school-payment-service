@@ -50,7 +50,7 @@ let options = {
   host:mysql_config.host,
   port:mysql_config.port,
   dialect:'mysql',
-  operatorsAliases :operatorsAliases,
+  operatorsAliases :operatorsAliases,  
   define: {
     timestamps: false
 }
