@@ -336,6 +336,7 @@ let processPayment = async (req) => {
                 t_mon_misc_fee: 0,
                 t_mon_due_amount: 0,
                 t_mon_comment: '',
+                status:'pending',
                 t_mon_yearly_one_time_fee: 0,
                 t_mon_total_fee: Number(feesDetails.feesAmount),
                 t_mis_upload_id: 0
@@ -358,6 +359,7 @@ let processPayment = async (req) => {
                 t_mon_concession: '0 %',
                 t_mon_misc_fee: 0,
                 t_mon_due_amount: 0,
+                status:'pending',
                 t_mon_comment: '',
                 t_mon_yearly_one_time_fee: 0,
                 t_mon_total_fee: Number(feesDetails.feesAmount),
@@ -381,6 +383,7 @@ let processPayment = async (req) => {
                 t_mon_concession: '0 %',
                 t_mon_misc_fee: 0,
                 t_mon_due_amount: 0,
+                status:'pending',
                 t_mon_comment: '',
                 t_mon_yearly_one_time_fee: 0,
                 t_mon_total_fee: Number(feesDetails.penalty),
