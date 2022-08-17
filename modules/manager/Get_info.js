@@ -54,16 +54,18 @@ let getFeesInfo = async (stu_dr_no, financial_year) => {
         throw new BadRequestError('Student DR number can not be empty');
     }
     //let student_record = await StudentModal.findOne({ where: { stu_dr_no: stu_dr_no }, raw: true })
-    let SearchSql = "SELECT t_stu.* FROM t_stu_students t_stu INNER JOIN t_adm_admissions t_adm ON t_adm.t_adm_admission_id = t_stu.t_adm_admission_id WHERE t_stu.stu_dr_no="+stu_dr_no+" AND t_adm.t_adm_session='"+financial_year+"'";        
+    let SearchSql = "SELECT t_stu.* FROM t_stu_students t_stu INNER JOIN t_adm_admissions t_adm ON t_adm.t_stu_sudent_id = t_stu.t_stu_sudent_id WHERE t_stu.stu_dr_no="+stu_dr_no+" AND t_adm.t_adm_session='"+financial_year+"'";        
     let student_recordarr = await CustomQueryModel.query(SearchSql, {
         type: SequelizeObj.QueryTypes.SELECT,
         raw: true
     });    
+    
     if (!student_recordarr.length) {
         throw new BadRequestError('Student record not found.');
     }    
     let student_record = student_recordarr[0]
-    let admission_record = await AdmissionModal.findOne({ where: { t_adm_admission_id: student_record.t_adm_admission_id }, raw: true })
+    let admission_record = await AdmissionModal.findOne({ where: { t_stu_sudent_id: student_record.t_stu_sudent_id,t_adm_session:financial_year }, raw: true })
+    
     if (!admission_record) {
         throw new BadRequestError('Admission record not found.');
     }
@@ -171,7 +173,7 @@ let getArrerFeesInfo = async (stu_dr_no, financial_year) => {
     if (!stu_dr_no) {
         throw new BadRequestError('Student DR number can not be empty');
     }
-    let SearchSql = "SELECT t_stu.* FROM t_stu_students t_stu INNER JOIN t_adm_admissions t_adm ON t_adm.t_adm_admission_id = t_stu.t_adm_admission_id WHERE t_stu.stu_dr_no="+stu_dr_no+" AND t_adm.t_adm_session='"+financial_year+"'";        
+    let SearchSql = "SELECT t_stu.* FROM t_stu_students t_stu INNER JOIN t_adm_admissions t_adm ON t_adm.t_stu_sudent_id = t_stu.t_stu_sudent_id WHERE t_stu.stu_dr_no="+stu_dr_no+" AND t_adm.t_adm_session='"+financial_year+"'";        
     let student_recordarr = await CustomQueryModel.query(SearchSql, {
         type: SequelizeObj.QueryTypes.SELECT,
         raw: true
@@ -180,7 +182,7 @@ let getArrerFeesInfo = async (stu_dr_no, financial_year) => {
         throw new BadRequestError('Student record not found.');
     }    
     let student_record = student_recordarr[0]
-    let admission_record = await AdmissionModal.findOne({ where: { t_adm_admission_id: student_record.t_adm_admission_id }, raw: true })
+    let admission_record = await AdmissionModal.findOne({ where: { t_stu_sudent_id: student_record.t_stu_sudent_id,t_adm_session:financial_year }, raw: true })
     if (!admission_record) {
         throw new BadRequestError('Admission record not found.');
     }
