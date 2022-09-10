@@ -9,6 +9,7 @@ let BadRequestError = require('../errors/badRequestError'),
     TempTransactionsModal = require('../models/TempTransaction'),
     FeePaidModal = require('../models/FeePaids'),
     LateFeesModal = require('../models/LateFees'),
+    GuardiansModal = require('../models/Guardians'),
     CustomQueryModel = require("../models/Custom_query"),
     SequelizeObj = require("sequelize"),
     moment = require('moment'),
@@ -64,12 +65,15 @@ let getFeesInfo = async (stu_dr_no, financial_year) => {
         throw new BadRequestError('Student record not found.');
     }    
     let student_record = student_recordarr[0]
+    
+    let guardian_record = await GuardiansModal.findOne({ where: { gur_dr_no: stu_dr_no }, raw: true })
     let admission_record = await AdmissionModal.findOne({ where: { t_stu_sudent_id: student_record.t_stu_sudent_id,t_adm_session:financial_year }, raw: true })
     
     if (!admission_record) {
         throw new BadRequestError('Admission record not found.');
     }
     student_record.admission_record = admission_record
+    student_record.guardian_record = guardian_record
     let section_record = await SectionModal.findOne({ where: { t_sec_section_id: admission_record.t_sec_section_id }, raw: true })
     student_record.section_record = section_record
     student_record.t_sec_section_name = section_record.t_sec_section_name

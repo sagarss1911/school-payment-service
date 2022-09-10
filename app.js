@@ -16,7 +16,6 @@ let express         = require('express'),
     swaggerUi = require("swagger-ui-express");
     let getInfoManager = require("./modules/manager/Get_info")
     
-process.env.TZ = "Africa/Gamibia";
 console.log('Initializing Server.',new Date().toString() );
 console.log("Environment: " +process.env.NODE_ENV);
 console.log("Loading Environment Constant: " +constant);
