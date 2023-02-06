@@ -2,15 +2,12 @@
 let sequelize_mysql = require("../helpers/sequelize-mysql");
 let Sequelize = require("sequelize");
 
-module.exports = sequelize_mysql.define("temp_transaction",
+module.exports = sequelize_mysql.define("t_mon_monthly_fee_paids",
     {
-        id :{
+        t_mon_monthly_fee_paid_id :{
             type: Sequelize.INTEGER,
             autoIncrement: true,
             primaryKey: true
-        },
-        transaction_id :{
-            type: Sequelize.STRING,
         },
         t_adm_admission_id : {
             type: Sequelize.INTEGER,        
@@ -25,7 +22,7 @@ module.exports = sequelize_mysql.define("temp_transaction",
             type: Sequelize.STRING,
         },
         t_mon_collection_date : {
-            type: Sequelize.DATE,
+            type: Sequelize.STRING,
         },
         t_mon_collection_date_time : {
             type: Sequelize.DATE,
@@ -34,7 +31,7 @@ module.exports = sequelize_mysql.define("temp_transaction",
             type: Sequelize.DATE,
         },
         t_mon_paid_month_dt : {
-            type: Sequelize.DATE,
+            type: Sequelize.STRING,
         },
         t_mon_fee_type : {
             type: Sequelize.INTEGER,        
@@ -63,32 +60,8 @@ module.exports = sequelize_mysql.define("temp_transaction",
         t_mis_upload_id : {
             type: Sequelize.INTEGER,          
         },
-        status : {
-            type: Sequelize.STRING,          
-        },
-        parent_name : {
-            type: Sequelize.STRING,          
-        },
-        parent_email : {
-            type: Sequelize.STRING,          
-        },
-        parent_mobile : {
-            type: Sequelize.STRING,          
-        },
-        txn_no : {
-            type: Sequelize.STRING,          
-        },
-        txn_amount_received : {
-            type: Sequelize.STRING,          
-        },
-        txn_date : {
-            type: Sequelize.STRING,          
-        },
-        txt_mode : {
-            type: Sequelize.STRING,          
-        },
-        stu_dr_no : {
-            type: Sequelize.STRING,          
+        transaction_id :{
+            type: Sequelize.STRING,
         },
         created : {
             type: Sequelize.DATE,
@@ -101,7 +74,7 @@ module.exports = sequelize_mysql.define("temp_transaction",
     },
     {
         freezeTableName: true,
-        tableName: 'temp_transaction'
+        tableName: 't_mon_monthly_fee_paids'
     }
 );
 

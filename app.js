@@ -85,6 +85,24 @@ app.post('/payment_status',async (req,res,next)=>{
   
 
 }) 
+app.post('/s2s_response',async (req,res,next)=>{
+  
+  console.log("s2s_response payment_status",req.body)  
+ let resp = await getInfoManager.markPaymentSuccess(req)
+  console.log("s2s_response processed response",resp)
+  if(!resp.status){
+    res.sendStatus(400)
+    
+  }else{
+    res.sendStatus(200)
+  }
+  
+
+}) 
+app.post('/manual_transaction',async (req,res,next)=>{
+  
+  let resp = await getInfoManager.manualTransactions(req) 
+}) 
 app.use('/public', express.static(__dirname + '/public'));
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
